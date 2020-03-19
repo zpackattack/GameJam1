@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     public float Speed = 0.1f;
     Rigidbody rb;
     public float currentSize = 1;
+    public Camera camera;
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +40,37 @@ public class PlayerControl : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("fired");
-        if (collision.gameObject.name == "Enemy")
+        //Проверяем, что объект с которым мы столкнулись в имени содержит слово Enemy
+        if (collision.gameObject.name.Contains("Enemy"))
         {
-            Destroy(collision.gameObject);
-            currentSize += 0.5f;
-            transform.localScale = new Vector3(currentSize, currentSize, 1);
-        }
 
+            if (currentSize >= collision.gameObject.transform.localScale.x)
+            {
+
+                //тогда, удаляем со сцены объект, с которым столкнулись
+                Destroy(collision.gameObject);
+                //Увеличиваем значение переменной, которая отвечает за размер игрока
+                currentSize += 0.1f;
+                //Устанавливаем новый размер с помощью изменения масштаба игрока
+                transform.localScale = new Vector3(currentSize, currentSize, 1);
+            }
+            else
+            {
+                currentSize -= 0.2f;
+                //Устанавливаем новый размер с помощью изменения масштаба игрока
+                transform.localScale = new Vector3(currentSize, currentSize, 1);
+
+                if (currentSize <= 0)
+                {
+                    Debug.Log("Game over");
+                }
+            }
+
+            if (currentSize>2)
+            camera.transform.localPosition = new Vector3(0, 0, 50 * (currentSize/2));
+        }
+        
+                
     }
 }
 
