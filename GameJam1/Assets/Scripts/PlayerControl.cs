@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class PlayerControl : MonoBehaviour
 
                 if (currentSize <= 0)
                 {
-                    Debug.Log("Game over");
+                    SceneManager.LoadScene(4);
                 }
             }
 

@@ -1,0 +1,5 @@
+sceneSetups:
+- path: /Users/treyzaccour/Library/Mobile Documents/com~apple~CloudDocs/.Trash/GameJam1/GameJam1/Assets/Scenes/SampleScene.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
