@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class PlayerControl : MonoBehaviour
     Rigidbody rb;
     public float currentSize = 1;
     public Camera camera;
-    public Text scoreText;
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +35,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             rb.AddForce(0, -Speed, 0);
-        }
-
-        scoreText.text = (currentSize * 10).ToString();
+        }        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,11 +54,6 @@ public class PlayerControl : MonoBehaviour
                 currentSize += 0.1f;
                 //Устанавливаем новый размер с помощью изменения масштаба игрока
                 transform.localScale = new Vector3(currentSize, currentSize, 1);
-                if (currentSize >= 5)
-                {
-                    SceneManager.LoadScene(5);
-                }
-
             }
             else
             {
@@ -76,11 +67,11 @@ public class PlayerControl : MonoBehaviour
                 }
             }
 
-            if (currentSize > 2)
-                camera.transform.localPosition = new Vector3(0, 0, 50 * (currentSize / 2));
+            if (currentSize>2)
+            camera.transform.localPosition = new Vector3(0, 0, 50 * (currentSize/2));
         }
-
-
+        
+                
     }
 }
 
