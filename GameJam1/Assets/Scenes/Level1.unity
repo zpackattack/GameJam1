@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 864493950}
   - component: {fileID: 864493949}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,6 +611,7 @@ MonoBehaviour:
   Speed: 5
   currentSize: 1
   camera: {fileID: 1453074138}
+  scoreText: {fileID: 864493949}
 --- !u!1 &995804233
 GameObject:
   m_ObjectHideFlags: 0
