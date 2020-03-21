@@ -30,7 +30,7 @@ public class EnemyManager : MonoBehaviour
             spriteRender.color = new Color(Random.value, Random.value, Random.value);
             //Генерируем спрайту случайное положение
             enemy.transform.position = new Vector3(Random.Range(-50,50), Random.Range(-50, 50), 0);
-            float scale = Random.Range(0.5f, player.currentSize + 1f);
+            float scale = Random.Range(0.1f, player.currentSize + 1f);
             enemy.transform.localScale = new Vector3(scale, scale, 1);
         }
     }
