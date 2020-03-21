@@ -985,7 +985,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Control the bacteria with the W A S D keys and try to absorb the smaller
     bacteria. Beware of larger bacteria because they will take from your size. You
-    lose if your size drops to zero. You win when your size is over 100.
+    lose if your size drops to zero. You win when your size is over 50.
 
     Have
     Fun!'
