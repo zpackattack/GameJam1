@@ -9,32 +9,46 @@ public class PlayerControl : MonoBehaviour
     Rigidbody rb;
     public float currentSize = 1;
     public Camera camera;
+    public AudioClip playerAttack;
+    public AudioClip enemyAttack;
+    public GameObject BubblePop;
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float currentSpeed = Speed;
+        if (currentSize > 2)
+        {
+            camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, new Vector3(0, 0, 50 * (currentSize / 2)), Time.deltaTime * 0.5f);
+            currentSpeed = Speed * currentSize;
+        }
+
+
+        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(currentSize, currentSize, 1), Time.deltaTime * 2);
         if (Input.GetKey(KeyCode.D))
         {
-            rb.AddForce(-Speed, 0, 0);
+            rb.AddForce(-currentSpeed, 0, 0);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(0, Speed, 0);
+            rb.AddForce(0, currentSpeed, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            rb.AddForce(Speed, 0, 0);
+            rb.AddForce(currentSpeed, 0, 0);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(0, -Speed, 0);
+            rb.AddForce(0, -currentSpeed, 0);
         }        
     }
 
@@ -45,30 +59,43 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.name.Contains("Enemy"))
         {
 
+
             if (currentSize >= collision.gameObject.transform.localScale.x)
             {
-
+                audio.clip = playerAttack;
                 //тогда, удаляем со сцены объект, с которым столкнулись
+                
+                GameObject current = Instantiate<GameObject>(BubblePop);
+                ParticleSystem particle =  current.GetComponent<ParticleSystem>();
+                var main = particle.main;
+                main.startSize = collision.gameObject.transform.localScale.x*5;                
+                current.transform.position = collision.gameObject.transform.position;
+                Destroy(current, 1);
                 Destroy(collision.gameObject);
+                EnemyManager.currentEnemyCount--;
                 //Увеличиваем значение переменной, которая отвечает за размер игрока
-                currentSize += 0.1f;
+                currentSize += 0.5f;
                 //Устанавливаем новый размер с помощью изменения масштаба игрока
-                transform.localScale = new Vector3(currentSize, currentSize, 1);
+
+                
+               
             }
             else
             {
+                audio.clip = enemyAttack;
                 currentSize -= 0.2f;
                 //Устанавливаем новый размер с помощью изменения масштаба игрока
-                transform.localScale = new Vector3(currentSize, currentSize, 1);
+                
 
                 if (currentSize <= 0)
                 {
                     SceneManager.LoadScene(4);
                 }
             }
+            audio.Play();
 
-            if (currentSize>2)
-            camera.transform.localPosition = new Vector3(0, 0, 50 * (currentSize/2));
+            
+                
         }
         
                 
