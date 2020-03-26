@@ -50,7 +50,7 @@ public class EnemyControl : MonoBehaviour
                 
                 //Принимаем случайное решение о том что делать дальше:
                 //либо уходить в протовоположенную сторону от игрока, или попытаться выбрать другое случайное направление
-                if (Random.Range(1, 10)  > 7)
+                if (Random.Range(1, 10)  > 5)
                 {
                     //Двигаемся в ту же сторону и с той же скоростью, что и игрок, тем самым уходя от него
                     rb.AddForce(transform.position - player.transform.position);
