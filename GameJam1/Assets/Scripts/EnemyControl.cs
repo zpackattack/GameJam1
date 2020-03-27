@@ -50,15 +50,15 @@ public class EnemyControl : MonoBehaviour
                 
                 //Принимаем случайное решение о том что делать дальше:
                 //либо уходить в протовоположенную сторону от игрока, или попытаться выбрать другое случайное направление
-                if (Random.Range(1, 10)  > 5)
+                if (Random.Range(1, 10)  > 6)
                 {
                     //Двигаемся в ту же сторону и с той же скоростью, что и игрок, тем самым уходя от него
-                    rb.AddForce(transform.position - player.transform.position);
+                    rb.AddForce((transform.position - player.transform.position)*player.transform.localScale.x/2);
                 }
                 else
                 {
                     //Принимаем случайное решение, о том, нужно ли менять текущее направление
-                    if (Random.Range(-10, 10) > 8)
+                    if (Random.Range(-10, 10) > 4)
                     {
                         //меняем направление
                         directionX = Random.Range(-currentSpeed, currentSpeed);
