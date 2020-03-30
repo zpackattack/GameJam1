@@ -8,11 +8,11 @@ public class PlayerControl : MonoBehaviour
     public float Speed = 0.1f;
     Rigidbody rb;
     public float currentSize = 1;
-    public Camera camera;
+    public new Camera camera;
     public AudioClip playerAttack;
     public AudioClip enemyAttack;
     public GameObject BubblePop;
-    AudioSource audio;
+    new AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
@@ -28,9 +28,9 @@ public class PlayerControl : MonoBehaviour
         if (currentSize > 2)
         {
             camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, new Vector3(0, 0, 50 * (currentSize / 2)), Time.deltaTime * 0.5f);
-            currentSpeed = Speed * currentSize;
+           
         }
-
+        currentSpeed = Speed * currentSize;
 
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(currentSize, currentSize, 1), Time.deltaTime * 2);
         if (Input.GetKey(KeyCode.D))
@@ -74,11 +74,8 @@ public class PlayerControl : MonoBehaviour
                 Destroy(collision.gameObject);
                 EnemyManager.currentEnemyCount--;
                 //Увеличиваем значение переменной, которая отвечает за размер игрока
-                currentSize += 0.5f;
-                //Устанавливаем новый размер с помощью изменения масштаба игрока
-
-                
-               
+                currentSize += 0.2f;
+                //Устанавливаем новый размер с помощью изменения масштаба игрока                               
             }
             else
             {

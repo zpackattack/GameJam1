@@ -12,6 +12,9 @@ public class EnemyControl : MonoBehaviour
     PlayerControl player;
     Rigidbody playerRigidBody;
     public float speed = 5;
+    SpriteRenderer spriteRenderer;
+    bool isDestroy = false;
+    Color currentColor;
 
     // Start is called before the first frame update
     void Start()
@@ -22,18 +25,25 @@ public class EnemyControl : MonoBehaviour
         player = FindObjectOfType<PlayerControl>();
         playerRigidBody = player.GetComponent<Rigidbody>();
         StartCoroutine(CheckAndDestroy());
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentColor = spriteRenderer.color;
+        spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0);
+      
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (spriteRenderer.color.a <= 1f && isDestroy == false)
+            spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(spriteRenderer.color.a, 1f, Time.deltaTime / 0.5f));
+            
 
         float currentSpeed = speed;
         float currentMinDistance = minDistance;
         if (transform.localScale.x > 2)
         {
             currentSpeed = speed * (transform.localScale.x);
-            currentMinDistance = minDistance * (transform.localScale.x / 2);
+            currentMinDistance = minDistance * (player.currentSize/2);
         }
         //Находим дистанцию между игроком и текущей бактерией.
         float distance = Vector3.Distance(player.transform.position, transform.position);
@@ -50,7 +60,7 @@ public class EnemyControl : MonoBehaviour
                 
                 //Принимаем случайное решение о том что делать дальше:
                 //либо уходить в протовоположенную сторону от игрока, или попытаться выбрать другое случайное направление
-                if (Random.Range(1, 10)  > 6)
+                if (Random.Range(1, 10)  > 6.5f)
                 {
                     //Двигаемся в ту же сторону и с той же скоростью, что и игрок, тем самым уходя от него
                     rb.AddForce((transform.position - player.transform.position)*player.transform.localScale.x/2);
@@ -73,7 +83,7 @@ public class EnemyControl : MonoBehaviour
             {
                 //Принимаем случайное решение о том что делать дальше:
                 //либо целенаправлено двигаемся к игроку, или попытаться выбрать другое случайное направление
-                if (Random.Range(1, 10) > 7)
+                if (Random.Range(1, 10) > 6.5f)
                 {
                     //Двигаемся в ту же сторону и с той же скоростью, что и игрок, тем самым уходя от него
                     rb.AddForce(player.transform.position - transform.position);
@@ -113,7 +123,13 @@ public class EnemyControl : MonoBehaviour
             Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
             bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
             if (!onScreen)
-            {                
+            {
+                isDestroy = true;
+                while (spriteRenderer.color.a > 0)
+                {
+                    spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(spriteRenderer.color.a, -0.1f, Time.deltaTime / 0.5f));
+                    yield return new WaitForEndOfFrame();
+                }
                 Destroy(gameObject);
                 EnemyManager.currentEnemyCount--;
             }
