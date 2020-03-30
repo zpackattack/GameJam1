@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d6a01fd3c4a4c66b9a5f10d5b823d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 7
   currentSize: 1
   camera: {fileID: 1453074138}
   playerAttack: {fileID: 8300000, guid: 159db931d92924eb8a3cf1798a017b8b, type: 3}
@@ -1018,6 +1018,9 @@ MonoBehaviour:
   - {fileID: 6647877263976236845, guid: e2b13540fd10844bd8165f8ee508a083, type: 3}
   - {fileID: 5799548175873402290, guid: 2a9d2d94794e4415bb06005277a375e9, type: 3}
   - {fileID: 2558381339312237819, guid: 91242a06045754396b831458ada58dcd, type: 3}
+  - {fileID: 6010639481350551970, guid: 6b3e59472903a40ef9d53edf4fcbe697, type: 3}
+  - {fileID: 8772706205314751661, guid: b46bf5f3ab3e94e91a6c8ab689e28bea, type: 3}
+  - {fileID: 773633649715823406, guid: 447955486b5c84678ac51ac629ac0433, type: 3}
   AmounStartBubbles: 30
   Player: {fileID: 866230598}
   offsetX: 25
