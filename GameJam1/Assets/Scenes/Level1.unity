@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d6a01fd3c4a4c66b9a5f10d5b823d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 7
+  Speed: 6
   currentSize: 1
   camera: {fileID: 1453074138}
   playerAttack: {fileID: 8300000, guid: 159db931d92924eb8a3cf1798a017b8b, type: 3}
@@ -1136,7 +1136,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a46052bb700d2428aa6cb98cf19fc444, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0

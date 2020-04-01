@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float currentSpeed = Speed;
         if (currentSize > 2)
@@ -74,8 +74,14 @@ public class PlayerControl : MonoBehaviour
                 Destroy(collision.gameObject);
                 EnemyManager.currentEnemyCount--;
                 //Увеличиваем значение переменной, которая отвечает за размер игрока
-                currentSize += 0.2f;
+                 //0.5      1    = 0.5 =  0.5 / 
+                 //0.9      1    = 0.1 = 0.9
+                 //0.5      4    = 3.5 = 0.125
+                 //
+                //transform.localScale - collision.transform.localScale.x
+                currentSize += collision.transform.localScale.x / transform.localScale.x / 2;
                 //Устанавливаем новый размер с помощью изменения масштаба игрока                               
+
             }
             else
             {

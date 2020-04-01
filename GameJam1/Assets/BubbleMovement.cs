@@ -26,7 +26,7 @@ public class BubbleMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Random.Range(-10, 10) > 8)
         {

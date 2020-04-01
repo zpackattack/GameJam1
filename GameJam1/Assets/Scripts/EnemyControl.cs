@@ -32,7 +32,7 @@ public class EnemyControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (spriteRenderer.color.a <= 1f && isDestroy == false)
             spriteRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, Mathf.Lerp(spriteRenderer.color.a, 1f, Time.deltaTime / 0.5f));
@@ -42,9 +42,9 @@ public class EnemyControl : MonoBehaviour
         float currentMinDistance = minDistance;
         if (transform.localScale.x > 2)
         {
-            currentSpeed = speed * (transform.localScale.x);
-            currentMinDistance = minDistance * (player.currentSize/2);
+            currentSpeed = speed * (transform.localScale.x);          
         }
+        currentMinDistance = minDistance * (player.currentSize);
         //Находим дистанцию между игроком и текущей бактерией.
         float distance = Vector3.Distance(player.transform.position, transform.position);
 
@@ -60,7 +60,7 @@ public class EnemyControl : MonoBehaviour
                 
                 //Принимаем случайное решение о том что делать дальше:
                 //либо уходить в протовоположенную сторону от игрока, или попытаться выбрать другое случайное направление
-                if (Random.Range(1, 10)  > 6.5f)
+                if (Random.Range(1, 10)  > 6f)
                 {
                     //Двигаемся в ту же сторону и с той же скоростью, что и игрок, тем самым уходя от него
                     rb.AddForce((transform.position - player.transform.position)*player.transform.localScale.x/2);
@@ -83,7 +83,7 @@ public class EnemyControl : MonoBehaviour
             {
                 //Принимаем случайное решение о том что делать дальше:
                 //либо целенаправлено двигаемся к игроку, или попытаться выбрать другое случайное направление
-                if (Random.Range(1, 10) > 6.5f)
+                if (Random.Range(1, 10) > 6f)
                 {
                     //Двигаемся в ту же сторону и с той же скоростью, что и игрок, тем самым уходя от него
                     rb.AddForce(player.transform.position - transform.position);

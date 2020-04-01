@@ -27,7 +27,7 @@ public class EnemyManager : MonoBehaviour
             spriteRender.color = new Color(Random.value, Random.value, Random.value);
             //Генерируем спрайту случайное положение
             enemy.transform.position = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), 0);
-            float scale = Random.Range(0.1f, player.currentSize + 1f);
+            float scale = Random.Range(player.currentSize * 0.5f, player.currentSize + 1f);
             enemy.transform.localScale = new Vector3(scale, scale, 1);
             currentEnemyCount++;
         }
@@ -35,7 +35,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(currentEnemyCount< maxEnemyCount)
         //Пробуем на текущем кадре создать нового противника
@@ -76,7 +76,8 @@ public class EnemyManager : MonoBehaviour
 
 
             enemy.transform.position = new Vector3(player.transform.position.x + x, player.transform.position.y + y, 0);
-            float scale = Random.Range(player.currentSize * 0.25f, player.currentSize * 1.75f);
+            float scale = Random.Range(player.currentSize * 0.5f, player.currentSize * 1.75f);
+                // Debug.Log(scale);
             enemy.transform.localScale = new Vector3(scale, scale, 1);
                 currentEnemyCount++; 
         }

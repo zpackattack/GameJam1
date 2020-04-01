@@ -32,7 +32,7 @@ public class BubbleGenerator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         float currentOffsetX = offsetX ;
@@ -43,8 +43,7 @@ public class BubbleGenerator : MonoBehaviour
              currentOffsetY = offsetY * (Player.currentSize / 2);
         }
 
-
-        Debug.Log(currentCountBubble);
+        
         if (Random.Range(0,10) > 8)
         if (currentCountBubble < MaxBubble && freeLayers.Count!=0)
         {
